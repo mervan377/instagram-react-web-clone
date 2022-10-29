@@ -52,10 +52,12 @@ export const login = async (email, password) => {
 export const getUserInfo = async (uname) => {
   const username = await getDoc(doc(db, "usernames", uname));
   if (username.exists()) {
-    return await (await getDoc(doc(db, "users", username.data().user_id))).data();
+    return await (
+      await getDoc(doc(db, "users", username.data().user_id))
+    ).data();
   } else {
-	toast.error("Kullanıcı bulunamadı")
-    throw new Error("Kullanıcı bulunamadı")
+    toast.error("Kullanıcı bulunamadı");
+    throw new Error("Kullanıcı bulunamadı");
   }
 };
 

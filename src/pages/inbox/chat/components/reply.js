@@ -12,8 +12,8 @@ export default function Reply({ setMessages }) {
       {
         from: {
           id: "nOoW5upxd4aUepJggZsCgBUwl5D3",
-          name: "Tayfun Erbilen",
-          username: "tayfunerbilen",
+          name: "Mervan Yalçın",
+          username: "mervan37",
           avatar:
             "https://pbs.twimg.com/profile_images/1526647892726915073/tN9rYw3V_400x400.jpg",
         },

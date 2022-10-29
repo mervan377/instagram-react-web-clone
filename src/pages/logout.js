@@ -1,12 +1,10 @@
-import {logout} from "firebase.js";
-import {useEffect} from "react";
+import { logout } from "firebase.js";
+import { useEffect } from "react";
 
 export default function Logout() {
+  useEffect(() => {
+    logout();
+  });
 
-	useEffect(() => {
-		logout()
-	})
-
-	return null
-
+  return null;
 }

@@ -1,6 +1,6 @@
 import store from "store";
-import {setUser} from "store/auth";
+import { setUser } from "store/auth";
 
-export const userHandle = data => {
-	store.dispatch(setUser(data))
-}
+export const userHandle = (data) => {
+  store.dispatch(setUser(data));
+};
