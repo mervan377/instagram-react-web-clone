@@ -169,7 +169,7 @@ export default function Chat() {
   return (
     <div className="flex-1">
       <Header user={user} />
-      <Messages messages={messages} />
+      <Messages messages={messages} /> 
       <Reply setMessages={setMessages} />
     </div>
   );

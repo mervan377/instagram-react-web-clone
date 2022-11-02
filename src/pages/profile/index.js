@@ -11,7 +11,9 @@ export default function ProfileLayout() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const { username } = useParams();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+
+  console.log(username)
 
   useEffect(() => {
     getUserInfo(username)
@@ -40,7 +42,7 @@ export default function ProfileLayout() {
           </title>
         </Helmet>
         <Header user={user} />
-        <nav className="border-t flex gap-x-16 justify-center items-center">
+        <nav className="border-t flex gap-x-16 justify-center items-center mt-10">
           <NavLink
             to={`/${username}`}
             end={true}
@@ -55,6 +57,37 @@ export default function ProfileLayout() {
             <Icon name="post" size={12} />
             POSTS
           </NavLink>
+
+          <NavLink
+            to={`/${username}/reels`}
+            end={true}
+            className={({ isActive }) =>
+              classNames({
+                "text-xs flex py-5 border-t tracking-widest -mt-px items-center gap-x-1.5 font-semibold": true,
+                "text-[#8e8e8e] border-transparent": !isActive,
+                "text-black border-black": isActive,
+              })
+            }
+          >
+            <Icon name="reels" size={12} />
+            REELS
+          </NavLink>
+
+          <NavLink
+            to={`/${username}/saved`}
+            end={true}
+            className={({ isActive }) =>
+              classNames({
+                "text-xs flex py-5 border-t tracking-widest -mt-px items-center gap-x-1.5 font-semibold": true,
+                "text-[#8e8e8e] border-transparent": !isActive,
+                "text-black border-black": isActive,
+              })
+            }
+          >
+            <Icon name="saved" size={12} />
+            SAVED
+          </NavLink>
+
           <NavLink
             to={`/${username}/tagged`}
             end={true}
@@ -69,6 +102,7 @@ export default function ProfileLayout() {
             <Icon name="tag" size={12} />
             TAGGED
           </NavLink>
+
         </nav>
         <Outlet />
       </div>

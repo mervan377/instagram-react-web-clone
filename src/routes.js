@@ -11,6 +11,10 @@ import Logout from "pages/logout";
 import InboxLayout from "pages/inbox";
 import Inbox from "pages/inbox/inbox";
 import Chat from "pages/inbox/chat";
+import ProfileReels from "pages/profile/reels";
+import ProfileSaved from "pages/profile/saved";
+import AccountsLayout from "pages/accounts";
+import Edit from "pages/accounts/edit";
 
 const routes = [
   {
@@ -38,6 +42,14 @@ const routes = [
             path: "tagged",
             element: <ProfileTagged />,
           },
+          {
+            path: "reels",
+            element: <ProfileReels />,
+          },
+          {
+            path: "saved",
+            element: <ProfileSaved />,
+          },
         ],
       },
       {
@@ -54,6 +66,17 @@ const routes = [
           },
         ],
       },
+
+      {
+        path: "/accounts",
+        element: <AccountsLayout />,
+        children: [
+          {
+            path: "edit",
+            element: <Edit />,
+          },
+        ],
+      },
     ],
   },
   {
@@ -61,6 +84,7 @@ const routes = [
     element: <AuthLayout />,
     children: [
       {
+        index: true,
         path: "login",
         element: <Login />,
       },

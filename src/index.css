@@ -28,4 +28,13 @@
     .messages-box>div {
         @apply flex flex-col gap-y-2
     }
+
+    .accounts-sidebar-ul li {
+        height: 20px;
+        padding: 26px 26px 26px 30px;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        
+    }
 }
