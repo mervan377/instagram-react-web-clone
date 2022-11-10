@@ -1,7 +1,23 @@
 import Icon from "components/Icon";
-import { NavLink } from "react-router-dom";
+import { getUserInfo } from "firebase.js";
+import { useEffect, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
 
 export default function Header({ user }) {
+
+  
+  const [isUser, setIsUser] = useState(null);
+  const { username } = useParams();
+
+  useEffect(()=> {
+    getUserInfo(username).then((username) => {
+      setIsUser(username)
+    }).catch((err) => {
+      setIsUser(false)
+    })
+  }, [])
+ 
+
   return (
     <>
       <header className="flex items-center px-24 gap-x-24 py-4 pb-10">
@@ -50,7 +66,7 @@ export default function Header({ user }) {
             <br />
             <span className="text-link font-semibold">
               <a href={user.website} target="_blank">
-                mervanyalcin.com
+                {user.website}
               </a>
             </span>
             <br />

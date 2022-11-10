@@ -1,28 +1,31 @@
 import { useParams, useNavigate, NavLink, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getUserInfo } from "firebase.js";
-import Header from "./components/header";
+import { getUserInfo, getUserInfoByID } from "firebase.js";
+import Header from "./components/Header";
 import Icon from "components/Icon";
 import classNames from "classnames";
-import ProfileNotFound from "pages/profile/not-found";
+import ProfileNotFound from "pages/profile/Not-Found";
 import { Helmet } from "react-helmet";
+import { getAuth } from "firebase/auth";
 
 export default function ProfileLayout() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const { username } = useParams();
-  const navigate = useNavigate(); 
-
-  console.log(username)
+  const navigate = useNavigate();
+  const auth = getAuth();
 
   useEffect(() => {
-    getUserInfo(username)
+    getUserInfoByID(auth.currentUser.uid)
       .then((user) => {
         setUser(user);
       })
       .catch((err) => {
         setUser(false);
       });
+
+
+      console.log(username)
   }, []);
 
   if (user === false) {
@@ -102,7 +105,6 @@ export default function ProfileLayout() {
             <Icon name="tag" size={12} />
             TAGGED
           </NavLink>
-
         </nav>
         <Outlet />
       </div>

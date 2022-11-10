@@ -1,20 +1,22 @@
 import PrivateRoute from "components/PrivateRoute";
-import MainLayout from "pages/layout";
-import Home from "pages/home";
+import MainLayout from "pages/Layout";
+import Home from "pages/Home";
 import ProfileLayout from "pages/profile";
-import ProfilePosts from "pages/profile/posts";
-import ProfileTagged from "pages/profile/tagged";
-import Login from "pages/auth/login";
-import Register from "pages/auth/register";
+import ProfilePosts from "pages/profile/Posts";
+import ProfileTagged from "pages/profile/Tagged";
+import Login from "pages/auth/Login";
+import Register from "pages/auth/Register";
 import AuthLayout from "pages/auth";
-import Logout from "pages/logout";
+import Logout from "pages/Logout";
 import InboxLayout from "pages/inbox";
-import Inbox from "pages/inbox/inbox";
+import Inbox from "pages/inbox/Inbox";
 import Chat from "pages/inbox/chat";
-import ProfileReels from "pages/profile/reels";
-import ProfileSaved from "pages/profile/saved";
+import ProfileReels from "pages/profile/Reels";
+import ProfileSaved from "pages/profile/Saved";
 import AccountsLayout from "pages/accounts";
-import Edit from "pages/accounts/edit";
+import Edit from "pages/accounts/Edit";
+import ProfessionalAccopunt from "pages/accounts/ProfessionalAccopunt";
+import ChangePassword from "pages/accounts/ChangePassword";
 
 const routes = [
   {
@@ -66,7 +68,6 @@ const routes = [
           },
         ],
       },
-
       {
         path: "/accounts",
         element: <AccountsLayout />,
@@ -75,6 +76,14 @@ const routes = [
             path: "edit",
             element: <Edit />,
           },
+          {
+            path:"professional-account",
+            element: <ProfessionalAccopunt />
+          },
+          {
+            path:"change-password",
+            element: <ChangePassword />
+          }
         ],
       },
     ],

@@ -1,6 +1,6 @@
 import Icon from "components/Icon";
 import { useSelector } from "react-redux";
-import ChatList from "pages/inbox/components/chatlist";
+import ChatList from "pages/inbox/components/Chatlist";
 
 export default function Sidebar() {
   const user = useSelector((state) => state.auth.user);

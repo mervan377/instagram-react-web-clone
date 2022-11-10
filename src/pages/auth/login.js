@@ -84,6 +84,7 @@ export default function Login() {
               <Form className="grid gap-y-1.5">
                 <Input
                   name="username"
+                  type="email"
                   label="Phone number, username or email"
                 />
                 <Input type="password" name="password" label="Password" />

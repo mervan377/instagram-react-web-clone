@@ -14,6 +14,7 @@ export default function Input({ label, type = "text", ...props }) {
       setType("password");
     }
   }, [show]);
+ 
 
   return (
     <label className="block relative flex bg-zinc-50 border rounded-sm focus-within:border-gray-400">
@@ -26,6 +27,7 @@ export default function Input({ label, type = "text", ...props }) {
         {...field}
         {...props}
       />
+      
       <small
         className={classNames({
           "absolute left-[9px] cursor-text pointer-events-none text-gray-400 -translate-y-1/2 transition-all": true,

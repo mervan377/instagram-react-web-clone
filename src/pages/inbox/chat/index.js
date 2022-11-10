@@ -1,6 +1,6 @@
-import Header from "./components/header";
-import Reply from "./components/reply";
-import Messages from "pages/inbox/chat/components/messages";
+import Header from "./components/Header";
+import Reply from "./components/Reply";
+import Messages from "pages/inbox/chat/components/Messages";
 import { useState } from "react";
 
 export default function Chat() {

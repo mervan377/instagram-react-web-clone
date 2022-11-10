@@ -1,4 +1,4 @@
-import Message from "./message";
+import Message from "./Message";
 import ScrollToBottom from "react-scroll-to-bottom";
 
 export default function Messages({ messages }) {

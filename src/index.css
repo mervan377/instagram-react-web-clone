@@ -31,10 +31,34 @@
 
     .accounts-sidebar-ul li {
         height: 20px;
-        padding: 26px 26px 26px 30px;
+        padding: 26px 26px 26px 26px;
         width: 100%;
         display: inline-flex;
         align-items: center;
-        
+        position: relative;
+    }
+
+    .accounts-sidebar-ul li a.activee::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2px;
+        height: 52px;
+        background-color: #000000;
+    }
+
+    .accounts-sidebar-ul li:hover::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3px;
+        height: 52px;
+        background-color: #dbdbdb;
+    }
+
+    .accounts-sidebar-ul li:hover {
+        cursor: pointer
     }
 }

@@ -57,23 +57,23 @@ export default function Register() {
               <p className="text-xs text-[#8e8e8e] py-2">
                 People who use our service may have uploaded your contact
                 information to Instagram.{" "}
-                <a href="#" className="font-semibold">
+                <Link href="#" className="font-semibold">
                   Learn More
-                </a>
+                </Link>
                 <br />
                 <br />
                 By signing up, you agree to our{" "}
-                <a href="#" className="font-semibold">
+                <Link href="#" className="font-semibold">
                   Terms
-                </a>
+                </Link>
                 ,{" "}
-                <a href="#" className="font-semibold">
+                <Link href="#" className="font-semibold">
                   Data Policy
-                </a>{" "}
+                </Link>{" "}
                 and{" "}
-                <a href="#" className="font-semibold">
+                <Link href="#" className="font-semibold">
                   Cookies Policy
-                </a>
+                </Link>
                 .
               </p>
               <Button

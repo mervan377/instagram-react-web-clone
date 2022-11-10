@@ -1,16 +1,12 @@
-import { useParams, useNavigate, NavLink, Outlet } from "react-router-dom";
-import Header from "components/Header";
+import { Outlet } from "react-router-dom";
 import { getUserInfo } from "firebase.js";
 import React from "react";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import Sidebar from "./components/Sidebar";
 import AccountsNotFound from "./AccountsNotFound";
 
 export default function AccountsLayout() {
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   const username = {
     name: "Mervan Yalçın",
@@ -30,8 +26,8 @@ export default function AccountsLayout() {
   }, []);
 
   if (user === false) {
-      return <AccountsNotFound />;
-    }
+    return <AccountsNotFound />;
+  }
 
   if (user === null) {
     return <div>Loading...</div>;
@@ -39,8 +35,7 @@ export default function AccountsLayout() {
 
   return (
     user && (
-      <div  className="flex bg-white border">
-
+      <div className="flex bg-white border-[1.4px] mb-20">
         <Sidebar />
 
         <Outlet />
