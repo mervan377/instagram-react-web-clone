@@ -4,19 +4,15 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import AccountsNotFound from "./AccountsNotFound";
+import { useSelector } from "react-redux";
 
 export default function AccountsLayout() {
   const [user, setUser] = useState(null);
 
-  const username = {
-    name: "Mervan Yalçın",
-    uname: "mervan37",
-    avatar:
-      "https://pbs.twimg.com/profile_images/1502055692471087125/MadX2ZVE_400x400.jpg",
-  };
+  const auth = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    getUserInfo(username.uname)
+    getUserInfo(auth.username)
       .then((user) => {
         setUser(user);
       })

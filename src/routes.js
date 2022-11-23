@@ -54,17 +54,23 @@ const routes = [
           },
         ],
       },
+
       {
-        path: "inbox",
-        element: <InboxLayout />,
+        path: "direct",
         children: [
           {
-            index: true,
-            element: <Inbox />,
-          },
-          {
-            path: ":conversationId",
-            element: <Chat />,
+            path: "inbox",
+            element: <InboxLayout />,
+            children: [
+              {
+                index: true,
+                element: <Inbox />,
+              },
+              {
+                path: ":conversationId",
+                element: <Chat />,
+              },
+            ],
           },
         ],
       },
@@ -77,13 +83,13 @@ const routes = [
             element: <Edit />,
           },
           {
-            path:"professional-account",
-            element: <ProfessionalAccopunt />
+            path: "professional-account",
+            element: <ProfessionalAccopunt />,
           },
           {
-            path:"change-password",
-            element: <ChangePassword />
-          }
+            path: "change-password",
+            element: <ChangePassword />,
+          },
         ],
       },
     ],

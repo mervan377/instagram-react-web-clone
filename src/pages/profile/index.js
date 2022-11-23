@@ -1,31 +1,26 @@
-import { useParams, useNavigate, NavLink, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getUserInfo, getUserInfoByID } from "firebase.js";
+import { useParams, NavLink, Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Icon from "components/Icon";
 import classNames from "classnames";
 import ProfileNotFound from "pages/profile/Not-Found";
 import { Helmet } from "react-helmet";
-import { getAuth } from "firebase/auth";
+import { useEffect } from "react";
+import { getUserInfo } from "firebase.js";
+import { useState } from "react";
 
 export default function ProfileLayout() {
-  const [loading, setLoading] = useState(true);
+  const currentUser = useParams();
   const [user, setUser] = useState(null);
-  const { username } = useParams();
-  const navigate = useNavigate();
-  const auth = getAuth();
+
 
   useEffect(() => {
-    getUserInfoByID(auth.currentUser.uid)
+    getUserInfo(currentUser.username)
       .then((user) => {
         setUser(user);
       })
       .catch((err) => {
         setUser(false);
       });
-
-
-      console.log(username)
   }, []);
 
   if (user === false) {
@@ -47,7 +42,7 @@ export default function ProfileLayout() {
         <Header user={user} />
         <nav className="border-t flex gap-x-16 justify-center items-center mt-10">
           <NavLink
-            to={`/${username}`}
+            to={`/${currentUser}`}
             end={true}
             className={({ isActive }) =>
               classNames({
@@ -62,7 +57,7 @@ export default function ProfileLayout() {
           </NavLink>
 
           <NavLink
-            to={`/${username}/reels`}
+            to={`/${currentUser}/reels`}
             end={true}
             className={({ isActive }) =>
               classNames({
@@ -77,7 +72,7 @@ export default function ProfileLayout() {
           </NavLink>
 
           <NavLink
-            to={`/${username}/saved`}
+            to={`/${currentUser}/saved`}
             end={true}
             className={({ isActive }) =>
               classNames({
@@ -92,7 +87,7 @@ export default function ProfileLayout() {
           </NavLink>
 
           <NavLink
-            to={`/${username}/tagged`}
+            to={`/${currentUser}/tagged`}
             end={true}
             className={({ isActive }) =>
               classNames({

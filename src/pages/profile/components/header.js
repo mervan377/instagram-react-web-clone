@@ -1,28 +1,16 @@
 import Icon from "components/Icon";
-import { getUserInfo } from "firebase.js";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 
 export default function Header({ user }) {
-
-  
-  const [isUser, setIsUser] = useState(null);
-  const { username } = useParams();
-
-  useEffect(()=> {
-    getUserInfo(username).then((username) => {
-      setIsUser(username)
-    }).catch((err) => {
-      setIsUser(false)
-    })
-  }, [])
- 
+  const userParams = useParams();
+  const user2 = useSelector((state) => state.auth.user);
 
   return (
     <>
       <header className="flex items-center px-24 gap-x-24 py-4 pb-10">
         <img
-          src="/no-avatar.jpeg"
+          src="https://pbs.twimg.com/profile_images/1502055692471087125/MadX2ZVE_400x400.jpg"
           alt=""
           className="w-[150px] h-[150px] rounded-full"
         />
@@ -31,9 +19,26 @@ export default function Header({ user }) {
             <h1 className="text-[28px] font-light text-textBasic">
               {user.username}
             </h1>
-            <NavLink to={`/accounts/edit`} className="bg-white text-textBasic border-gray-300 px-[9px] border">
-              Edit profile
-            </NavLink>
+
+            {userParams.username === user2.username && (
+              <>
+                <NavLink
+                  to={`/accounts/edit`}
+                  className="bg-white text-textBasic border-gray-300 px-[9px] border"
+                >
+                  Edit profile
+                </NavLink>
+              </>
+            )}
+
+            {userParams.username !== user2.username && (
+              <>
+                <button className="bg-white text-textBasic border-gray-300 px-[9px] border">
+                  Follow
+                </button>
+              </>
+            )}
+
             <button>
               <Icon size={24} name="settings" className="" />
             </button>

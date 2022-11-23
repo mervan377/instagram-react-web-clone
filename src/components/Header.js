@@ -1,6 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
 import Search from "components/Search";
-import { logout } from "firebase.js";
 import Icon from "components/Icon";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
@@ -26,24 +25,24 @@ export default function Header() {
               <Icon name={isActive ? "home-filled" : "home"} size={24} />
             )}
           </NavLink>
-          <NavLink to="/inbox">
+          <NavLink to="/direct/inbox">
             {({ isActive }) => (
               <Icon name={isActive ? "direct-filled" : "direct"} size={24} />
             )}
           </NavLink>
-          <NavLink to="/">
+          <NavLink onClick={() => {}}>
             <Icon name="new" size={24} />
           </NavLink>
-          <NavLink to="/">
+          <NavLink to="/explore/">
             <Icon name="explore" size={24} />
           </NavLink>
-          <NavLink to="/">
+          <NavLink onClick={() => {}}>
             <Icon name="heart" size={24} />
           </NavLink>
           <NavLink to={`/${user.username}`}>
             {({ isActive }) => (
               <img
-                src="/no-avatar.jpeg"
+                src="https://pbs.twimg.com/profile_images/1502055692471087125/MadX2ZVE_400x400.jpg"
                 alt=""
                 className={classNames({
                   "w-6 h-6 rounded-full": true,

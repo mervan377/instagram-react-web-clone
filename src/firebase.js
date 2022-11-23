@@ -6,18 +6,23 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  updateCurrentUser,
 } from "firebase/auth";
 import {
+  collection,
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   getFirestore,
+  limit,
+  orderBy,
+  query,
   runTransaction,
   setDoc,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { userHandle } from "utils";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBw-E8teeIeOwfKHKTNg0H-NC6io1tJXqs",
@@ -60,14 +65,20 @@ export const login = async (email, password) => {
 export const getUserInfo = async (uname) => {
   const username = await getDoc(doc(db, "usernames", uname));
   if (username.exists()) {
-    return await (
-      await getDoc(doc(db, "users", username.data().user_id))
-    ).data();
+    return (await getDoc(doc(db, "users", username.data().user_id))).data();
   } else {
     toast.error("Kullanıcı bulunamadı");
     throw new Error("Kullanıcı bulunamadı");
   }
 };
+
+// check all conditions before limit results
+export async function getSuggestedProfiles(userId, following) {
+  const first = await query(collection(db, "users"), limit(2));
+  const documentSnapshots = await getDocs(first);
+
+  return documentSnapshots;
+}
 
 export const getUserInfoByID = async (ID) => {
   const username = await getDoc(doc(db, "users", ID));
@@ -131,17 +142,10 @@ export const setUserFirestore = async ({
   gender,
 }) => {
   const currentUser = auth.currentUser;
-  const connUsers = doc(db, "users", currentUser.uid);
-  const connUsernames = doc(db, "usernames", username);
-
+  const getUsersData = await getDoc(doc(db, "users", currentUser.uid));
   try {
     await runTransaction(db, async (transaction) => {
-      const sfDoc = await transaction.get(connUsers);
-
-      if (!sfDoc.exists()) {
-        throw "Document does not exist!";
-      }
-      transaction.update(connUsers, {
+      transaction.update(doc(db, "users", currentUser.uid), {
         fullName: fullName,
         username: username,
         website: website,
@@ -150,26 +154,22 @@ export const setUserFirestore = async ({
         phoneNumber: phoneNumber,
         gender: gender,
       });
-      const username22 = await getDoc(doc(db, "users", currentUser.uid));
-      const usernames22 = await getDoc(
-        doc(db, "usernames", username22.data().username)
+      const getUsernamesData = await getDoc(
+        doc(db, "usernames", getUsersData.data().username)
       );
-      // console.log(username22.data().username);
-      // console.log(usernames22.data().user_id);
-      // console.log("New username : " + username);
+      await deleteDoc(doc(db, "usernames", getUsersData.data().username));
       await setDoc(doc(db, "usernames", username), {
-        user_id: usernames22.data().user_id,
+        user_id: getUsernamesData.data().user_id,
       });
-      await deleteDoc(doc(db, "usernames", username22.data().username));
-
-
     });
-    console.log("Transaction successfully committed!");
+
+    const getUsersDataSecond = await getDoc(doc(db, "users", currentUser.uid));
+    userHandle(getUsersDataSecond.data()); // Update user dispatch
+    toast.error("Transaction successfully committed!");
   } catch (e) {
-    toast.error(e.code);
+    console.log(e);
   }
 };
-
 
 export const logout = async () => {
   try {

@@ -1,18 +1,18 @@
-import { getUserInfo, getUserInfoByID, setUserFirestore } from "firebase.js";
+import { getUserInfo, setUserFirestore } from "firebase.js";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Form, Formik, Field } from "formik";
 import { NavLink } from "react-router-dom";
 import { EditSchema } from "validation";
-import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 export default function Edit() {
   const [user, setUser] = useState(null);
-  const auth = getAuth();
+  const currentUser = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    getUserInfoByID(auth.currentUser.uid)
+    getUserInfo(currentUser.username)
       .then((user) => {
         setUser(user);
       })
@@ -126,7 +126,9 @@ export default function Edit() {
                     className="border-[#dbdbdb] border px-[10px] h-20 w-full rounded"
                   />
                   {errors.bio && touched.bio ? <div>{errors.bio}</div> : null}
-                  <p className="text-[12px] text-[#8e8e8e]">{41} / 150</p>
+                  <p className="text-[12px] text-[#8e8e8e]">
+                    {41} / 150 
+                  </p>
 
                   <p className="text-[12px] text-[#8e8e8e]">
                     <p>Personal information</p>
@@ -205,7 +207,7 @@ export default function Edit() {
                 <div className="flex w-[194px] items-start justify-end font-semibold text-right"></div>
                 <div className="w-[502px] pl-4 gap-y-3 flex pr-[130px]">
                   <button
-                    type="submit" 
+                    type="submit"
                     className="bg-brand h-[30px] w-[65px] border border-white py-[5px] px-[9px] text-sm text-white font-semibold "
                   >
                     Submit

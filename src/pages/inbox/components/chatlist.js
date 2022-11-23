@@ -50,7 +50,7 @@ export default function ChatList() {
             "!bg-[#efefef]": +conversationId === chat.id,
           })}
           key={chat.id}
-          to={`/inbox/${chat.id}`}
+          to={`/direct/inbox/${chat.id}`}
         >
           <img
             src={chat.user.avatar}
