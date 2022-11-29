@@ -18,9 +18,6 @@ export default function Sidebar() {
     }).catch(err => {
       console.log("err")
     })
-
-    
-    console.log(user)
  
   }, [])
 

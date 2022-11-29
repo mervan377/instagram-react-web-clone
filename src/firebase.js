@@ -74,10 +74,19 @@ export const getUserInfo = async (uname) => {
 
 // check all conditions before limit results
 export async function getSuggestedProfiles(userId, following) {
-  const first = await query(collection(db, "users"), limit(2));
+  const first = query(collection(db, "users"), limit(2));
   const documentSnapshots = await getDocs(first);
 
-  return documentSnapshots;
+  const getUsersData = await getDoc(
+    doc(db, "users", "8DGUgU4ZFINkLjmsAdGDUIOQmD02")
+  );
+  
+  const denemebillah = await getDoc(doc(db, "usernames", getUsersData.data().username));
+  console.log(getUsersData);
+  console.log(denemebillah);
+  console.log(documentSnapshots.data());
+
+  return documentSnapshots; 
 }
 
 export const getUserInfoByID = async (ID) => {
