@@ -14,7 +14,7 @@ export default function Input({ label, type = "text", ...props }) {
       setType("password");
     }
   }, [show]);
- 
+
 
   return (
     <label className="block relative flex bg-zinc-50 border rounded-sm focus-within:border-gray-400">
